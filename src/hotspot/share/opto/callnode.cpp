@@ -1365,7 +1365,7 @@ CallLeafPureNode* CallLeafPureNode::inline_call_leaf_pure_node(Node* control) co
     control = in(TypeFunc::Control);
   }
 
-  CallLeafPureNode* call = new CallLeafPureNode(tf(), entry_point(), _name, TypeRawPtr::BOTTOM);
+  CallLeafPureNode* call = new CallLeafPureNode(tf(), entry_point(), _name, nullptr);
   call->init_req(TypeFunc::Control, control);
   call->init_req(TypeFunc::I_O, top);
   call->init_req(TypeFunc::Memory, top);
@@ -2450,7 +2450,7 @@ PowDNode::PowDNode(Compile* C, Node* base, Node* exp)
         OptoRuntime::Math_DD_D_Type(),
         StubRoutines::dpow() != nullptr ? StubRoutines::dpow() : CAST_FROM_FN_PTR(address, SharedRuntime::dpow),
         "pow",
-        TypeRawPtr::BOTTOM) {
+        nullptr) {
   add_flag(Flag_is_macro);
   C->add_macro_node(this);
 
