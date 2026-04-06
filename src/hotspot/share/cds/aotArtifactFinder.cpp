@@ -146,6 +146,12 @@ void AOTArtifactFinder::find_artifacts() {
 #if INCLUDE_CDS_JAVA_HEAP
   // Keep scanning until we discover no more class that need to be AOT-initialized.
   if (CDSConfig::is_initing_classes_at_dump_time()) {
+ // Fix JDK-8381222 (JDK 26 only)
+ // Ensure that jdk.internal.loader.ClassLoaders${Platform,App}ClassLoader are
+ // AOT-initialized even if one or both of these loaders have no modules in the archived FMG.
+ add_aot_inited_class(InstanceKlass::cast(SystemDictionary::java_platform_loader()->klass()));
+ add_aot_inited_class(InstanceKlass::cast(SystemDictionary::java_system_loader()->klass()));
+
     while (_pending_aot_inited_classes->length() > 0) {
       InstanceKlass* ik = _pending_aot_inited_classes->pop();
       HeapShared::copy_and_rescan_aot_inited_mirror(ik);
