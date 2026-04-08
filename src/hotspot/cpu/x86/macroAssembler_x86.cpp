@@ -1971,20 +1971,6 @@ void MacroAssembler::movhlf(XMMRegister dst, XMMRegister src, Register rscratch)
   }
 }
 
-void MacroAssembler::mov64(Register dst, int64_t imm64) {
-  if (is_uimm32(imm64)) {
-    movl(dst, checked_cast<uint32_t>(imm64));
-  } else if (is_simm32(imm64)) {
-    movq(dst, checked_cast<int32_t>(imm64));
-  } else {
-    Assembler::mov64(dst, imm64);
-  }
-}
-
-void MacroAssembler::mov64(Register dst, int64_t imm64, relocInfo::relocType rtype, int format) {
-  Assembler::mov64(dst, imm64, rtype, format);
-}
-
 void MacroAssembler::movptr(Register dst, Register src) {
   movq(dst, src);
 }
