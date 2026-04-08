@@ -7473,7 +7473,7 @@ instruct minmaxD_reduction_reg(legRegD dst, legRegD a, legRegD b, legRegD xtmp, 
   predicate(!VM_Version::supports_avx10_2() && UseAVX > 0 && VLoopReductions::is_reduction(n));
   match(Set dst (MaxD a b));
   match(Set dst (MinD a b));
-  effect(USE a, USE b, TEMP rtmp, KILL cr);
+  effect(USE a, USE b, TEMP xtmp, TEMP rtmp, KILL cr);
 
   format %{ "minmaxD_reduction $dst, $a, $b \t! using $xtmp and $rtmp as TEMP" %}
   ins_encode %{
