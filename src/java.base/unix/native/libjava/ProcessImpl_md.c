@@ -834,7 +834,7 @@ Java_java_lang_ProcessImpl_forkAndExec(JNIEnv *env,
 
     if ((fds[0] == -1 && pipeSafely(in)  < 0) ||
         (fds[1] == -1 && pipeSafely(out) < 0) ||
-        (fds[2] == -1 && !redirectErrorStream && pipe(err) < 0) || // if not redirecting create the pipe
+        (fds[2] == -1 && !redirectErrorStream && pipeSafely(err) < 0) || // if not redirecting create th        e pipe
         (pipeSafely(childenv) < 0) ||
         (pipeSafely(fail) < 0)) {
         throwInternalIOException(env, errno, "Bad file descriptor", mode);
