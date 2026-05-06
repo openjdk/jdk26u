@@ -36,11 +36,19 @@ import java.util.List;
 import java.util.Set;
 
 /*
- * @test
+ * @test id=FORK
  * @bug 8289643 8291760
- * @requires (os.family == "linux" & !vm.musl)
+ * @requires os.family == "mac" | (os.family == "linux" & !vm.musl)
  * @summary File descriptor leak detection with ProcessBuilder.startPipeline
- * @run testng/othervm PipelineLeaksFD
+ * @run testng/othervm -Djdk.lang.Process.launchMechanism=FORK PipelineLeaksFD
+ */
+
+/*
+ * @test id=POSIX_SPAWN
+ * @bug 8289643 8291760
+ * @requires os.family == "mac" | (os.family == "linux" & !vm.musl)
+ * @summary File descriptor leak detection with ProcessBuilder.startPipeline
+ * @run testng/othervm -Djdk.lang.Process.launchMechanism=POSIX_SPAWN PipelineLeaksFD
  */
 
 @Test
@@ -63,6 +71,8 @@ public class PipelineLeaksFD {
     void checkForLeaks(List<ProcessBuilder> builders) throws IOException {
 
         Set<PipeRecord> pipesBefore = myPipes();
+
+        System.out.println("Using:" + System.getProperty("jdk.lang.Process.launchMechanism"));
         if (pipesBefore.size() < 3) {
             System.out.println(pipesBefore);
             Assert.fail("There should be at least 3 pipes before, (0, 1, 2)");
