@@ -38,7 +38,7 @@ import java.util.Set;
 /*
  * @test id=FORK
  * @bug 8289643 8291760
- * @requires os.family == "mac" | (os.family == "linux" & !vm.musl)
+ * @requires (os.family == "linux" & !vm.musl)
  * @summary File descriptor leak detection with ProcessBuilder.startPipeline
  * @run testng/othervm -Djdk.lang.Process.launchMechanism=FORK PipelineLeaksFD
  */
@@ -46,7 +46,7 @@ import java.util.Set;
 /*
  * @test id=POSIX_SPAWN
  * @bug 8289643 8291760
- * @requires os.family == "mac" | (os.family == "linux" & !vm.musl)
+ * @requires (os.family == "linux" & !vm.musl)
  * @summary File descriptor leak detection with ProcessBuilder.startPipeline
  * @run testng/othervm -Djdk.lang.Process.launchMechanism=POSIX_SPAWN PipelineLeaksFD
  */
