@@ -1990,30 +1990,30 @@ Zone America/Edmonton	-7:33:52 -	LMT	1906 Sep
 # PST to PDT, the next day inaugurates the new standard time Pacific Time,
 # i.e., just one clock change but two name changes separated by 21 hours.
 # PT, the obvious abbreviation for Pacific Time, is one letter too short
-# to conform to TZDB's (and POSIX's) [-+[:alnum:]]{3,6} requirements.
+# to conform to TZDB’s (and POSIX’s) [-+[:alnum:]]{3,6} requirements.
 # I asked the BC government for advice, with no response. For now, do this:
-#   1. As a temporary hack, pretend that the BC law takes effect
-#      not on 2026-03-09 at 00:00, but on 2026-11-01 at 02:00.
-#      This pretense works around a limitation in CLDR v48.2 (2026-03-17),
-#      which would otherwise say the interval uses "Pacific Standard Time".
-#      (Below, this temporary hack is marked "Temporary hack; see above.")
-#      Strictly speaking this hack is incorrect since the interval uses
-#      standard time, but it does have the right UT offset and it
-#      works around the CLDR limitation.  We should be able to remove
-#      the temporary hack after CLDR is fixed.
-#   2. After the BC law takes effect, model the time as MST sans DST.
-#      We can change this later if another conforming non-numeric abbreviation
-#      for Pacific Time becomes more popular.  Possibilities include:
+#   1.	As a temporary hack, pretend that the BC law takes effect
+#	not on 2026-03-09 at 00:00, but on 2026-11-01 at 02:00.
+#	This pretense works around a limitation in CLDR v48.2 (2026-03-17),
+#	which would otherwise say the interval uses “Pacific Standard Time”.
+#	(Below, this temporary hack is marked “Temporary hack; see above.”)
+#	Strictly speaking this hack is incorrect since the interval uses
+#	standard time, but it does have the right UT offset and it
+#	works around the CLDR limitation.  We should be able to remove
+#	the temporary hack after CLDR is fixed.
+#   2.	After the BC law takes effect, model the time as MST sans DST.
+#	We can change this later if another conforming non-numeric abbreviation
+#	for Pacific Time becomes more popular.  Possibilities include:
 #   MST - the most compatible with existing software and practice,
-#      and already used in parts of BC and in Yukon
+#	and already used in parts of BC and in Yukon
 #   PDT - almost as software-friendly, but confusing because it implies
-#      it is DST and is paired with PST, whereas PT is standard time
+#	it is DST and is paired with PST, whereas PT is standard time
 #   PST - straightforward but even more confusing,
-#      and will likely break much software that assumes PST is -08
+#	and will likely break much software that assumes PST is -08
 #   -07 - accurate and clear in itself, but makes BC look odd vs neighbors
 #   CPT, CPST - for Canadian Pacific (Standard) Time,
-#      by analogy with AEST in Australia
-#   P-T - conforming approximation to "PT"
+#	by analogy with AEST in Australia
+#   P-T - conforming approximation to “PT”
 #   PT+ - like P-T but suggesting one-hour advance over PST
 
 # From Chris Walton (2026-03-15):
