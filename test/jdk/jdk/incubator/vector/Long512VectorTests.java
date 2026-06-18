@@ -1009,6 +1009,10 @@ public class Long512VectorTests extends AbstractVectorTest {
                 return fill(s * BUFFER_REPS,
                             i -> (((long)(i + 1) == 0) ? 1 : (long)(i + 1)));
             }),
+            withToString("long[smallOddValue(i)]", (int s) -> {
+                return fill(s * BUFFER_REPS,
+                            i -> (long)(i % 7 == 0 ? -3 : (i % 3 == 0 ? -1 : 1)));
+            }),
             withToString("long[cornerCaseValue(i)]", (int s) -> {
                 return fill(s * BUFFER_REPS,
                             i -> cornerCaseValue(i));
